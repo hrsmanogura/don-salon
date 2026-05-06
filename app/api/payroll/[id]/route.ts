@@ -7,8 +7,16 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const { base_pay, deductions, total_commission, gross_pay, net_pay, services } =
-      await req.json();
+    const {
+      week_ending,
+      week_label,
+      base_pay,
+      deductions,
+      total_commission,
+      gross_pay,
+      net_pay,
+      services,
+    } = await req.json();
 
     await query(
       `UPDATE payroll_records SET

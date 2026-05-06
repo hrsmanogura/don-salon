@@ -465,7 +465,11 @@ export default function PayrollTab() {
                   );
                   return (
                     <tr key={r.id} className="border-b border-[#e0dbd2] hover:bg-[#faf8f4] last:border-0">
-                      <td className="px-4 py-3 text-left" data-label="Date">{r.week_ending}</td>
+                      <td className="px-4 py-3 text-left" data-label="Date">{new Date(r.week_ending).toLocaleDateString("en-PH", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                      })}</td>
                       <td className="px-4 py-3 text-left" data-label="Day">{r.week_label}</td>
                       <td className="px-4 py-3 text-center" data-label="Services">
                         <span className="bg-[#1a1a2e] text-white text-xs font-bold px-2.5 py-1 rounded-full">
@@ -498,7 +502,9 @@ export default function PayrollTab() {
         {editRecord && (
           <div>
             <p className="text-[#c9a84c] font-semibold text-sm mb-4">
-              {editRecord.week_label} ({editRecord.week_ending})
+              {editRecord.week_label} (
+              {new Date(editRecord.week_ending).toLocaleDateString("en-PH")}
+              )
             </p>
 
             <div className="grid grid-cols-2 gap-3 mb-4">
