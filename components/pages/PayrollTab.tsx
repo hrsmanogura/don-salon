@@ -182,8 +182,8 @@ export default function PayrollTab() {
     const grouped = groupTaps(taps);
     const payload = {
       employee_id: selectedEmpId,
-      work_date: workDate,
-      day_label: dayLabel,
+      week_ending: workDate,
+      week_label: dayLabel,
       base_pay: basePay,
       deductions,
       total_commission: totalCommission,
@@ -301,7 +301,7 @@ export default function PayrollTab() {
     records.forEach((r) => {
       const totalSvcs = (r.services || []).reduce((s, sv) => s + Number(sv.qty), 0);
       ws_data.push([
-        r.work_date, r.day_label, totalSvcs,
+        r.week_ending, r.week_label, totalSvcs,
         r.base_pay, r.deductions, r.total_commission, r.gross_pay, r.net_pay,
       ]);
     });
@@ -465,8 +465,8 @@ export default function PayrollTab() {
                   );
                   return (
                     <tr key={r.id} className="border-b border-[#e0dbd2] hover:bg-[#faf8f4] last:border-0">
-                      <td className="px-4 py-3 text-left" data-label="Date">{r.work_date}</td>
-                      <td className="px-4 py-3 text-left" data-label="Day">{r.day_label}</td>
+                      <td className="px-4 py-3 text-left" data-label="Date">{r.week_ending}</td>
+                      <td className="px-4 py-3 text-left" data-label="Day">{r.week_label}</td>
                       <td className="px-4 py-3 text-center" data-label="Services">
                         <span className="bg-[#1a1a2e] text-white text-xs font-bold px-2.5 py-1 rounded-full">
                           {totalSvcs} service{totalSvcs !== 1 ? "s" : ""}
@@ -498,7 +498,7 @@ export default function PayrollTab() {
         {editRecord && (
           <div>
             <p className="text-[#c9a84c] font-semibold text-sm mb-4">
-              {editRecord.day_label} ({editRecord.work_date})
+              {editRecord.week_label} ({editRecord.week_ending})
             </p>
 
             <div className="grid grid-cols-2 gap-3 mb-4">
